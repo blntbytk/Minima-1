@@ -32,30 +32,30 @@ done
 apt update
 apt install openjdk-11-jre-headless curl jq -y
 
-if [ ! $(getent group minima) ]; then
-  echo "[+] Adding minima group"
-  groupadd -g 9001 minima
+if [ ! $(getent group minima2) ]; then
+  echo "[+] Adding minima2 group"
+  groupadd -g 9001 minima2
 fi
 
 if ! id -u 9001 > /dev/null 2>&1; then
-  echo "[+] Adding minima user"
-    useradd -r -u 9001 -g 9001 -d $HOME minima
+  echo "[+] Adding minima2 user"
+    useradd -r -u 9001 -g 9001 -d $HOME minima2
     mkdir $HOME
-    chown minima:minima $HOME
+    chown minima2:minima2 $HOME
 fi
 
-wget -q -O $HOME"/minima_service.sh" "https://github.com/minima-global/Minima/raw/master/scripts/minima_service.sh"
-chown minima:minima $HOME"/minima_service.sh"
-chmod +x $HOME"/minima_service.sh"
+wget -q -O $HOME"/minima2_service.sh" "https://github.com/blntbytk/Minima/raw/master/scripts/minima_service.sh"
+chown minima2:minima2 $HOME"/minima2_service.sh"
+chmod +x $HOME"/minima2_service.sh"
 
-CMD="$HOME/minima_service.sh -s $@"
+CMD="$HOME/minima2_service.sh -s $@"
 CRONSTRING="#!/bin/sh
 $CMD"
 
 echo "$CRONSTRING" > /etc/cron.daily/minima_$PORT
 chmod a+x /etc/cron.daily/minima_$PORT
 
-CMD="$HOME/minima_service.sh $@"
+CMD="$HOME/minima2_service.sh $@"
 /bin/sh -c "$CMD"
 
 echo "Install complete - showing logs now -  Ctrl-C to exit logs, minima will keep running"

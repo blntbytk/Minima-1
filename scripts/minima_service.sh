@@ -35,16 +35,16 @@ if [ $SLEEP ]; then
   sleep "$(shuf -i1-3600 -n1)"
 fi
 
-if [ ! $(getent group minima) ]; then
-  echo "[+] Adding minima group"
-  groupadd -g 9001 minima
+if [ ! $(getent group minima2) ]; then
+  echo "[+] Adding minima2 group"
+  groupadd -g 9001 minima2
 fi
 
 if ! id -u 9001 > /dev/null 2>&1; then
-  echo "[+] Adding minima user"
-    useradd -r -u 9001 -g 9001 -d $HOME minima
+  echo "[+] Adding minima2 user"
+    useradd -r -u 9001 -g 9001 -d $HOME minima2
     mkdir $HOME
-    chown minima:minima $HOME
+    chown minima2:minima2 $HOME
 fi
 
 
@@ -53,17 +53,17 @@ if [ ! $PORT ]; then
 fi
 
 DOWNLOAD_URL="https://github.com/minima-global/Minima/raw/master/jar/minima.jar"
-MINIMA_JAR_NAME="minima.jar"
+MINIMA_JAR_NAME="minima2.jar"
 
 echo "[+] Downloading minima from: $DOWNLOAD_URL"
 wget -q -O $HOME"/"$MINIMA_JAR_NAME $DOWNLOAD_URL
-chown minima:minima $HOME"/"$MINIMA_JAR_NAME
+chown minima2:minima2 $HOME"/"$MINIMA_JAR_NAME
 chmod +x $HOME"/"$MINIMA_JAR_NAME
 
 if [ ! -d "$HOME/.minima_$PORT" ]; then
   echo "[+] Creating data directory .minima_${PORT}..."
   mkdir $HOME/.minima_$PORT
-  chown minima:minima $HOME/.minima_$PORT
+  chown minima2:minima2 $HOME/.minima_$PORT
 fi
 
 
@@ -103,7 +103,7 @@ tee <<EOF >/dev/null /etc/systemd/system/minima_$PORT.service
 [Unit]
 Description=minima_$PORT
 [Service]
-User=minima
+User=minima2
 Type=simple
 ExecStart=/usr/bin/java -Xmx1G -jar $HOME/$MINIMA_JAR_NAME $MINIMA_PARAMS
 Restart=always
