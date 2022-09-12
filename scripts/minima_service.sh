@@ -37,12 +37,12 @@ fi
 
 if [ ! $(getent group minima2) ]; then
   echo "[+] Adding minima2 group"
-  groupadd -g 9001 minima2
+  groupadd -g 13001 minima2
 fi
 
-if ! id -u 9001 > /dev/null 2>&1; then
+if ! id -u 13001 > /dev/null 2>&1; then
   echo "[+] Adding minima2 user"
-    useradd -r -u 9001 -g 9001 -d $HOME minima2
+    useradd -r -u 13001 -g 13001 -d $HOME minima2
     mkdir $HOME
     chown minima2:minima2 $HOME
 fi
