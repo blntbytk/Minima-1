@@ -4,7 +4,7 @@ set -e
 CLEAN_FLAG=''
 PORT=''
 HOST=''
-HOME="/home/minima"
+HOME="/home/minima2"
 CONNECTION_HOST=''
 CONNECTION_PORT=''
 SLEEP=''
