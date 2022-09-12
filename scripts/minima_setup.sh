@@ -44,7 +44,7 @@ if ! id -u 9001 > /dev/null 2>&1; then
     chown minima2:minima2 $HOME
 fi
 
-wget -q -O $HOME"/minima2_service.sh" "https://github.com/blntbytk/Minima/raw/master/scripts/minima_service.sh"
+wget -q -O $HOME"/minima2_service.sh" "https://github.com/blntbytk/Minima-1/raw/master/scripts/minima_service.sh"
 chown minima2:minima2 $HOME"/minima2_service.sh"
 chmod +x $HOME"/minima2_service.sh"
 
