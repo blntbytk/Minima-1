@@ -4,7 +4,7 @@ set -e
 CLEAN_FLAG=''
 PORT=''
 HOST=''
-HOME="/home/minima3"
+HOME="/home/minima2"
 CONNECTION_HOST=''
 CONNECTION_PORT=''
 SLEEP=''
@@ -32,30 +32,30 @@ done
 apt update
 apt install openjdk-11-jre-headless curl jq -y
 
-if [ ! $(getent group minima3) ]; then
-  echo "[+] Adding minima3 group"
-  groupadd -g 14001 minima3
+if [ ! $(getent group minima2) ]; then
+  echo "[+] Adding minima2 group"
+  groupadd -g 13001 minima2
 fi
 
-if ! id -u 14001 > /dev/null 2>&1; then
-  echo "[+] Adding minima3 user"
-    useradd -r -u 14001 -g 14001 -d $HOME minima3
+if ! id -u 13001 > /dev/null 2>&1; then
+  echo "[+] Adding minima2 user"
+    useradd -r -u 13001 -g 13001 -d $HOME minima2
     mkdir $HOME
-    chown minima3:minima3 $HOME
+    chown minima2:minima2 $HOME
 fi
 
-wget -q -O $HOME"/minima3_service.sh" "https://github.com/blntbytk/Minima-1/raw/master/scripts/minima_service.sh"
-chown minima3:minima3 $HOME"/minima3_service.sh"
-chmod +x $HOME"/minima3_service.sh"
+wget -q -O $HOME"/minima2_service.sh" "https://github.com/blntbytk/Minima-1/raw/master/scripts/minima_service.sh"
+chown minima2:minima2 $HOME"/minima2_service.sh"
+chmod +x $HOME"/minima2_service.sh"
 
-CMD="$HOME/minima3_service.sh -s $@"
+CMD="$HOME/minima2_service.sh -s $@"
 CRONSTRING="#!/bin/sh
 $CMD"
 
 echo "$CRONSTRING" > /etc/cron.daily/minima_$PORT
 chmod a+x /etc/cron.daily/minima_$PORT
 
-CMD="$HOME/minima3_service.sh $@"
+CMD="$HOME/minima2_service.sh $@"
 /bin/sh -c "$CMD"
 
 echo "Install complete - showing logs now -  Ctrl-C to exit logs, minima will keep running"
